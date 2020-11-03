@@ -385,12 +385,12 @@ public class frmPrincipal extends javax.swing.JFrame {
        else{
             i=0;
             x=1;
-            j=1;
-            while (i<Integer.parseInt(txtNombre.getText())+1){
-                          
-                         j=j*(i+1);
-                        x=x+1/j;
-            i=i+1;
+            k=1;
+            for (i=0; i<Integer.parseInt(txtNombre.getText()); i++){
+                j=i+1; 
+                  k=k*(j);      
+                  x=x+1/k;         
+                        
             }
           lblResultat.setText(String.valueOf(x));  
         }
@@ -399,37 +399,44 @@ public class frmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCalculerMouseClicked
 
     private void btnRemboursementMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRemboursementMouseClicked
-        // Exercice n°3
+       // Exercice n°3
                 // A vous de jouer
         if(txtPrix.getText().compareTo("")==0){
              JOptionPane.showMessageDialog(this, "veuillez saisir votre prix");   
         }
         else{
-            prix=Integer.parseInt(txtPrix.getText());
-            if (cboEtats.getSelectedItem().toString().compareTo("Occasion")==0 || cboEtats.getSelectedItem().toString().compareTo("Abimé")==0){
-                x=Integer.parseInt(txtPrix.getText())*30/100;
-                prix=prix-x;
-            }
-            if (cboEtats.getSelectedItem().toString().compareTo("Très abimé")==0 || cboEtats.getSelectedItem().toString().compareTo("Neuf")==0){
-                x=Integer.parseInt(txtPrix.getText())*10/100;
-                prix=prix-x;
-            }
-            if(rbNon.isSelected()==true){
-                x=Integer.parseInt(txtPrix.getText())*20/100;
-                prix=prix-x;
-            }
+           
             if(sldNbJours.getValue()>7){
                 prix=0;
             }
-            if (cboCategories.getSelectedItem().toString().compareTo("Livres")==0){
-                if(prix>30){
-                    prix=30;
+            else{
+               if (cboCategories.getSelectedItem().toString().compareTo("Livres")==0){
+               if(Integer.parseInt(txtPrix.getText())>30){
+                    txtPrix.setText(String.valueOf(30));
                 }
             }
              if (cboCategories.getSelectedItem().toString().compareTo("Jouets")==0){
-                if(prix>50){
-                    prix=50;
+                if(Integer.parseInt(txtPrix.getText())>50){
+                    txtPrix.setText(String.valueOf(50));
                 }
+            }
+                
+             prix=Integer.parseInt(txtPrix.getText());
+            if (cboEtats.getSelectedItem().toString().compareTo("Occasion")==0 || cboEtats.getSelectedItem().toString().compareTo("Abimé")==0){
+                x=Integer.parseInt(txtPrix.getText())*0.3;
+                prix=prix-x;
+            }
+            if (cboEtats.getSelectedItem().toString().compareTo("Très abimé")==0 || cboEtats.getSelectedItem().toString().compareTo("Neuf")==0){
+               x=Integer.parseInt(txtPrix.getText())*0.1;
+               prix=prix-x;
+            }
+            if(rbNon.isSelected()==true){
+                x=Integer.parseInt(txtPrix.getText())*0.2;
+                prix=prix-x;
+            }
+            
+            
+           
             }
              lblRemboursement.setText("le montant maximum à rembourser est de "+prix+" euros");
         }
@@ -440,7 +447,18 @@ public class frmPrincipal extends javax.swing.JFrame {
         // Exercice n°4
         
         // A vous de jouer
-       
+        if(txtEntier.getText().compareTo("")==0){
+           JOptionPane.showMessageDialog(this, "veuillez saisir votre entier"); 
+        }
+        else{
+        lblBinaire.setText("");
+        q=Integer.parseInt(txtEntier.getText());
+        while (q>0){
+        r=q%2;
+        q=q/2;
+        lblBinaire.setText(String.valueOf(r)+lblBinaire.getText());
+        }
+        }
         
     }//GEN-LAST:event_btnBinaireMouseClicked
 
@@ -479,8 +497,10 @@ public class frmPrincipal extends javax.swing.JFrame {
         });
     }
   String prime;
-  int i, j;
+  int i;
+  double j,k;
   double prix, x;
+  int q,r;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBinaire;
     private javax.swing.JButton btnCalculer;
